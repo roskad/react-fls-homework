@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adrian - Homework 1</title>
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,regular,500,600,700,800,900,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Nunito', sans-serif;
+      color: #fcfcfc;
+      background-color: #343f64;
+    }
+
+    .wrapper {
+      max-width: 1024px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: 40px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid #ccc;
+    }
+
+    .task-container {
+      margin-top: 10px;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #232a45;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .task-4 div {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .task-4 button {
+      position: relative;
+      bottom: 10px;
+    }
+
+    .task-input {
+      display: block;
+      margin-top: 10px;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    .task-list {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    button {
+      padding: 8px 12px;
+      font-size: 16px;
+      line-height: 1;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      background-color: #bc448b;
+      transition: background-color .3s ease;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #9e3975;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0;
+    }
+
+    img {
+      height: auto;
+      max-width: 300px;
+      margin-top: 10px;
+      border-radius: 8px;
+    }
+
+    hr {
+      margin: 10px 0;
+      border: 0;
+      border-top: 1px solid #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel">
+    function Task1() {
+      const [people, setPeople] = React.useState(0);
+
+      const busesPerPassenger = 20;
+      const bottlesPerPassenger = 2;
+      const sandwichesPerPassenger = 3;
+
+      const busesTotalNum = Math.ceil(people / busesPerPassenger);
+      const bottlesTotalNum = people * bottlesPerPassenger;
+      const sandwichesTotalNum = people * sandwichesPerPassenger;
+
+      return (
+        <div className="task-container">
+          <p>How many people are on this ride?</p>
+          <input className="task-input" id="task1" type="number" name="passengers" min={0} value={people} onChange={(e) => { setPeople(parseInt(e.target.value)) }} />
+          <p>For that amount we need:</p>
+          <ul>
+            <li>{busesTotalNum} buses (1 for 20 passengers)</li>
+            <li>{bottlesTotalNum} bottles of water (2 per each passenger)</li>
+            <li>{sandwichesTotalNum} sandwiches (3 per each passenger)</li>
+          </ul>
+        </div>
+      )
+    }
+
+    function Task2() {
+      const [month, setMonth] = React.useState(1);
+      const clothesList = ["winter coat", "jacket ", "shorts", "coat"];
+      const seasonsList = ["winter", "spring", "summer", "autumn"];
+      const imagesList = ["forest_winter", "forest_spring", "forest_summer", "forest_autumn", "forest"];
+      let season;
+      let clothes;
+      let imageSrc;
+
+      if (month < 1 || month > 12) {
+        season = "INCORRECT MONTH!";
+        imageSrc = imagesList[4];
+      }
+
+      if (month == 12 || month == 1 || month == 2) {
+        season = seasonsList[0];
+        clothes = clothesList[0];
+        imageSrc = imagesList[0];
+      }
+      if (month == 3 || month == 4 || month == 5) {
+        season = seasonsList[1];
+        clothes = clothesList[1];
+        imageSrc = imagesList[1];
+      }
+      if (month == 6 || month == 7 || month == 8) {
+        season = seasonsList[2];
+        clothes = clothesList[2];
+        imageSrc = imagesList[2];
+      }
+      if (month == 9 || month == 10 || month == 11) {
+        season = seasonsList[3];
+        clothes = clothesList[3];
+        imageSrc = imagesList[3];
+      }
+
+
+
+      return (
+        <div className="task-container">
+          <p>What month is it?</p>
+          <input className="task-input" type="number" name="month" min={1} max={12} value={month} onChange={(e) => { setMonth(parseInt(e.target.value)) }} />
+          <p>It is {season}. You should wear {clothes}</p>
+          <img src={`./img/${imageSrc}.jpg`} alt={`Forest in ${season}`} />
+        </div>
+      )
+    }
+
+    function Task3() {
+      const [minPoint, setMinPoint] = React.useState(0);
+      const [maxPoint, setMaxPoint] = React.useState(10);
+      const [number, setNumber] = React.useState(null);
+
+
+      function getRandomInteger(min, max) {
+        const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+        setNumber(randomNumber);
+      }
+
+      return (
+        <div className="task-container">
+          <p>Points (between {minPoint} and {maxPoint}):</p>
+          <label>
+            Set new min point:
+            <input className="task-input" type="number" name="newMinPoint" onChange={(e) => { setMinPoint(parseInt(e.target.value)) }} />
+          </label>
+          <label>
+            Set new max point:
+            <input className="task-input" type="number" name="newMaxPoint" onChange={(e) => { setMaxPoint(parseInt(e.target.value)) }} />
+          </label>
+          <p>Click the button to get a random number from the range above</p>
+          <button onClick={() => { getRandomInteger(minPoint, maxPoint) }}>Get number</button>
+          <p>Your number is {number}</p>
+        </div>
+      )
+    }
+
+    function Task4() {
+      const [accountSum, setAccountSum] = React.useState(0);
+      const [fee, setFee] = React.useState(0);
+      const [color, setColor] = React.useState(null)
+
+      const data = {
+        dollar: 41.6385, //NBU exchange rate as at 04.06.25
+        euro: 47.4263, //NBU exchange rate as at 04.06.25
+        fee: 0.03,
+      }
+
+      const dollarBalance = (accountSum / data.dollar).toFixed(2);
+      const euroBalance = (accountSum / data.euro).toFixed(2);
+
+      function roundTo(number, decimals) {
+        const multiplier = Math.pow(10, decimals);
+        return Math.round(number * multiplier) / multiplier;
+      }
+
+      function handleBalanceCredit() {
+        const creditInput = document.getElementById("creditInput").value;
+        if (creditInput === "") return;
+
+        const creditValue = roundTo(parseFloat(creditInput), 2);
+
+        if (creditValue > 0) {
+          const feeAmount = roundTo(creditValue * data.fee, 2);
+          const netCredit = roundTo(creditValue - feeAmount, 2);
+
+          setAccountSum((prevAccountSum) => roundTo(prevAccountSum + netCredit, 2));
+          setFee(roundTo(feeAmount, 2));
+
+
+          document.getElementById("creditInput").value = 0;
+        }
+      }
+
+      function handleBalanceWithdraw() {
+        const withdrawInput = document.getElementById("withdrawInput").value;
+        if (withdrawInput === "") return;
+
+        const withdrawValue = roundTo(parseFloat(withdrawInput), 2);
+        const feeAmount = roundTo(withdrawValue * data.fee, 2);
+        const totalDeduction = roundTo(withdrawValue + feeAmount, 2);
+
+        if (!(totalDeduction > accountSum || withdrawValue < 0)) {
+          setAccountSum((prevAccountSum) => roundTo(prevAccountSum - totalDeduction, 2));
+          setFee(roundTo(feeAmount, 2));
+
+          document.getElementById("withdrawInput").value = 0;
+        } else {
+          alert("Not enough money on the account!")
+        }
+      }
+
+      return (
+        <div className="task-container task-4">
+          <p>Account balance <span style={{ color: color ? "green" : "red" }}>{accountSum}</span>₴</p>
+          <div>
+            <label>
+              Enter the sum to credit
+              <input className="task-input" type="number" id="creditInput" min="1" defaultValue={0} />
+            </label>
+            <button onClick={() => (setColor(true), handleBalanceCredit())}>Credit</button>
+          </div>
+          <div>
+            <label>
+              Enter the sum to withdraw
+              <input className="task-input" type="number" id="withdrawInput" min="1" defaultValue={0} />
+            </label>
+            <button onClick={() => (setColor(false), handleBalanceWithdraw())}>Withdraw</button>
+          </div>
+          <p>Service fees (3%): {fee}₴</p>
+          <hr />
+          <p>Acount balance in US dollars: <span style={{ color: dollarBalance > 100 ? 'green' : 'red' }}>${dollarBalance}</span></p>
+          <p>Acount balance in euros: <span style={{ color: euroBalance > 100 ? 'green' : 'red' }}>€{euroBalance}</span></p >
+        </div>
+      )
+    }
+
+    function Task5() {
+      const credentials = [
+        { id: 1, userLogin: "qwerty", userPassword: "qwerty" },
+        { id: 2, userLogin: "admin", userPassword: "admin" },
+        { id: 3, userLogin: "Dudu", userPassword: "lovesBubu" },
+        { id: 4, userLogin: "Bubu", userPassword: "lovesDudu" },
+        { id: 5, userLogin: "granny", userPassword: "1111" }
+      ]
+
+      function checkSignIn(e) {
+        e.preventDefault();
+        const userLogin = document.querySelector("#userLogin");
+        const userPassword = document.querySelector("#userPassword");
+
+        credentials.forEach(user => {
+          if (userLogin.value == user.userLogin && userPassword.value == user.userPassword) {
+            alert("You are logged in")
+          }
+        })
+      }
+
+      return (
+        <div className="task-container">
+          <form id="task-5">
+            <div>
+              <label>
+                Login:
+                <input className="task-input" type="text" id="userLogin" />
+              </label>
+            </div>
+            <div>
+              <label>
+                Password:
+                <input className="task-input" type="password" id="userPassword" />
+              </label>
+            </div>
+            <button type="submit" onClick={checkSignIn}>Sign in</button>
+          </form>
+        </div>
+      )
+    }
+
+    const App = () => {
+      return (
+        <div className="wrapper">
+          <h1>Homework 1</h1>
+          <h2>Task 1</h2>
+          <Task1 />
+
+          <h2>Task 2</h2>
+          <Task2 />
+
+          <h2>Task 3</h2>
+          <Task3 />
+
+          <h2>Task 4</h2>
+          <Task4 />
+
+          <h2>Task 5</h2>
+          <Task5 />
+        </div>
+      )
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(React.createElement(App))
+
+  </script>
+</body>
+
+</html>
