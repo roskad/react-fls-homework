@@ -5,7 +5,8 @@ import { apiRoutes } from './apiRoutes'
 // Define a service using a base URL and expected endpoints
 export const api = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000' }),
+  // baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://react-fls-homework.onrender.com' }),
   tags: ['Patients', 'Appointments', 'Doctors'],
   endpoints: (builder) => ({
     getPatients: builder.query({
