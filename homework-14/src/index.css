@@ -1,0 +1,109 @@
+:root {
+  --text-color: #213547;
+  --text-over-dark: #fcfcfc;
+  --text-over-card: #213547;
+  --accent: #b14083;
+  --accent-hover: #9e3975;
+  --accent-bright: #ffebf7;
+  --text-accent: #e9db89;
+  --text-over-accent: #ffffff;
+  --hover: #b0a568;
+  --bg-color: #fcfcfc;
+  --bg-dark: #232a45;
+  --bg-card: #ededed;
+
+  font-family: "Nunito", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dark {
+  --text-color: #fcfcfc;
+  --text-over-dark: #fcfcfc;
+  --text-over-card: #fcfcfc;
+  --accent: #b14083;
+  --accent-hover: #9e3975;
+  --accent-bright: #232a45;
+  --text-accent: #e9db89;
+  --text-over-accent: #2b2b2b;
+  --hover: #b0a568;
+  --bg-color: #343f64;
+  --bg-dark: #232a45;
+  --bg-card: #232a45;
+
+  color-scheme: dark;
+}
+
+
+@import 'tailwindcss';
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@layer components {
+
+  a {
+    font-weight: 500;
+    color: var(--text-accent);
+    text-decoration: inherit;
+    transition: color .3s ease;
+  }
+
+  a:hover {
+    color: var(--hover);
+  }
+
+  body {
+    margin: 0 auto;
+    min-width: 320px;
+    height: 100vh;
+  }
+
+  button {
+    padding: 8px 12px;
+    font-size: 16px;
+    line-height: 1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--accent);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: var(--accent-hover);
+  }
+
+  button:focus,
+  button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      color: #213547;
+      background-color: #ffffff;
+    }
+
+    a:hover {
+      color: #747bff;
+    }
+
+    button {
+      background-color: #f9f9f9;
+    }
+  }
+}
